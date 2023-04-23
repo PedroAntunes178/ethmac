@@ -28,11 +28,12 @@ module iob_wishbone2iob #(
 );
     
     // IOb auxiliar wires
-    
+    wire valid_r;
+    wire valid_e;
     // Wishbone auxiliar wire
 
     // Logic
-    assign valid_o = (wb_cyc_i & wb_stb_i)&(~ready_i);
+    assign valid_o = (wb_stb_i)&(~valid_r);
     assign address_o  = wb_addr_i;
     assign wdata_o = wb_data_i;
     assign wstrb_o = wb_we_i? wb_select_i:4'h0;
@@ -40,6 +41,9 @@ module iob_wishbone2iob #(
     assign wb_data_o = rdata_i;
     assign wb_ack_o = ready_i;
     assign wb_error_o = 1'b0;
+
+    assign valid_e = valid_o|ready_i;
+    iob_reg #(1,0) iob_reg_valid (clk_i, arst_i, 1'b0, valid_e, valid_o, valid_r);
 
 
 endmodule

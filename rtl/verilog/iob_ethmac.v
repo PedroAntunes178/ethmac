@@ -29,7 +29,6 @@ module iob_ethmac #(
     input  wire [3:0] mii_rxd_i,
     input  wire       mii_rx_dv_i,
     input  wire       mii_rx_er_i,
-    input  wire       mii_rx_ctrl_i,
     input  wire       mii_tx_clk_i,
     output wire [3:0] mii_txd_o,
     output wire       mii_tx_en_o,
@@ -126,6 +125,8 @@ module iob_ethmac #(
     .mrxd_pad_i(mii_rxd_i),
     .mrxdv_pad_i(mii_rx_dv_i),
     .mrxerr_pad_i(mii_rx_er_i), 
+
+    // Common Tx and Rx
     .mcoll_pad_i(mii_coll_i),
     .mcrs_pad_i(mii_crs_i), 
     

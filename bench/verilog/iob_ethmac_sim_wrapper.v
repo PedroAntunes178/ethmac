@@ -86,8 +86,6 @@ module iob_ethmac_sim_wrapper #(
   wire [DATA_W/8-1:0]   m_wstrb;
   wire [DATA_W-1:0]     m_rdata;
   wire m_ready;
-  // // Ethernet MII
-  wire mii_rx_ctrl;
 
   // Logic
   assign clk_i = wb_clk_i;
@@ -140,7 +138,6 @@ module iob_ethmac_sim_wrapper #(
     .mii_rxd_i(mrxd_pad_i),
     .mii_rx_dv_i(mrxdv_pad_i),
     .mii_rx_er_i(mrxerr_pad_i),
-    .mii_rx_ctrl_i(mii_rx_ctrl),
     .mii_tx_clk_i(mtx_clk_pad_i),
     .mii_txd_o(mtxd_pad_o),
     .mii_tx_en_o(mtxen_pad_o),
