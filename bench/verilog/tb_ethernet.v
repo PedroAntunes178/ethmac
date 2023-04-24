@@ -24722,7 +24722,6 @@ begin
   $fdisplay(tb_log_file, "Failed tests   :   %d", tests_failed) ;
   $fdisplay(tb_log_file, "Successfull tests: %d", tests_successfull) ;
   $fdisplay(tb_log_file, "**************************** Ethernet MAC test summary **********************************") ;
-  $fclose(tb_log_file) ;
 end
 endtask // test_summary
 
