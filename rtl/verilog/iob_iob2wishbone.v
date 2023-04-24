@@ -32,6 +32,8 @@ module iob_iob2wishbone #(
     wire                valid_r;
     wire [ADDR_W-1:0]   address_r;
     wire [DATA_W-1:0]   wdata_r;
+    wire                ready;
+    wire                ready_r;
     // Wishbone auxiliar wire
     wire [DATA_W-1:0]   wb_data_r;
     wire [DATA_W/8-1:0] wb_select;
@@ -47,9 +49,6 @@ module iob_iob2wishbone #(
     assign wb_cyc_o = valid_i|valid_r;
     assign wb_stb_o = valid_i|valid_r;
 
-    assign rdata_o = ready_o? wb_data_i:wb_data_r;
-    assign ready_o = wb_ack_i|wb_error_i;
-
     assign wb_select = wb_we? wstrb_i:4'hf;
     assign wb_we = |wstrb_i;
 
@@ -60,5 +59,11 @@ module iob_iob2wishbone #(
     iob_reg #(DATA_W,0) iob_reg_iob_data (clk_i, arst_i, 1'b0, valid_i, wdata_i, wdata_r);
     iob_reg #(DATA_W/8,0) iob_reg_strb (clk_i, arst_i, 1'b0, valid_i, wb_select, wb_select_r);
     iob_reg #(DATA_W,0) iob_reg_wb_data (clk_i, arst_i, 1'b0, ready_o, wb_data_i, wb_data_r);
+
+    assign rdata_o = ready_o? wb_data_i:wb_data_r;
+    assign ready_o = ready&(~ready_r);
+    assign ready = wb_ack_i|wb_error_i;
+    iob_reg #(1,0) iob_reg_ready (clk_i, arst_i, 1'b0, valid_e, ready, ready_r);
+    
 
 endmodule
