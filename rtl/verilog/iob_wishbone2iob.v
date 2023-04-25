@@ -28,33 +28,27 @@ module iob_wishbone2iob #(
 );
     
     // IOb auxiliar wires
-    wire valid_r;
-    wire valid_e;
-    wire [DATA_W/8-1:0] wstrb;
-    wire [DATA_W/8-1:0] wstrb_r;
-    wire [DATA_W-1:0] rdata_r;
+    wire                valid_r;
+    wire                valid_e;
+    wire                ready;
+    wire                ready_r;
+    wire [DATA_W-1:0]   rdata_r;
     // Wishbone auxiliar wire
-    wire [ADDR_W-1:0] wb_addr_r;
-    wire [DATA_W-1:0] wb_data_r;
 
     // Logic
-    assign valid_o = (wb_stb_i)&(~valid_r);
-    assign address_o  = valid_o? wb_addr_i:wb_addr_r;
-    assign wdata_o = valid_o? wb_data_i:wb_data_r;
-    assign wstrb_o = valid_o? wstrb:wstrb_r;
-    
-    assign wb_data_o = ready_i? rdata_i:rdata_r;
-    assign wb_ack_o = ready_i;
-    assign wb_error_o = 1'b0;
-
-    assign wstrb = wb_we_i? wb_select_i:4'h0;
+    assign valid_o = (wb_cyc_i&wb_stb_i)&(~valid_r);
+    assign address_o  = wb_addr_i;
+    assign wdata_o = wb_data_i;
+    assign wstrb_o = wb_we_i? wb_select_i:4'h0;
 
     assign valid_e = valid_o|ready_i;
     iob_reg #(1,0) iob_reg_valid (clk_i, arst_i, 1'b0, valid_e, valid_o, valid_r);
-    iob_reg #(ADDR_W,0) iob_reg_addr (clk_i, arst_i, 1'b0, valid_o, wb_addr_i, wb_addr_r);
-    iob_reg #(DATA_W,0) iob_reg_data_i (clk_i, arst_i, 1'b0, valid_o, wb_data_i, wb_data_r);
-    iob_reg #(DATA_W/8,0) iob_reg_strb (clk_i, arst_i, 1'b0, valid_o, wstrb, wstrb_r);
-    iob_reg #(DATA_W,0) iob_reg_data_o (clk_i, arst_i, 1'b0, ready_i, rdata_i, rdata_r);
+
+    assign wb_data_o = ready_i? rdata_i:rdata_r;
+    assign wb_ack_o = (ready_i|ready_r)&wb_stb_i;
+    assign wb_error_o = 1'b0;
+    iob_reg #(DATA_W,0) iob_reg_rdata (clk_i, arst_i, 1'b0, ready_i, rdata_i, rdata_r);
+    iob_reg #(1,0) iob_reg_ready (clk_i, arst_i, ~wb_stb_i, ready_i, ready, ready_r);
 
 
 endmodule
