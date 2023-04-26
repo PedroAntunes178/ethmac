@@ -46,24 +46,24 @@ module iob_iob2wishbone #(
     assign wb_data_o = valid_i? wdata_i:wdata_r;
     assign wb_select_o = valid_i? wb_select:wb_select_r;
     assign wb_we_o = valid_i? wb_we:wb_we_r;
-    assign wb_cyc_o = valid_i|valid_r;
+    assign wb_cyc_o = valid_i|valid_r|wb_ack_i;
     assign wb_stb_o = valid_i|valid_r;
 
     assign wb_select = wb_we? wstrb_i:4'hf;
     assign wb_we = |wstrb_i;
 
-    assign valid_e = valid_i|ready_o;
+    assign valid_e = valid_i|ready;
     iob_reg #(1,0) iob_reg_valid (clk_i, arst_i, 1'b0, valid_e, valid_i, valid_r);
     iob_reg #(1,0) iob_reg_we (clk_i, arst_i, 1'b0, valid_i, wb_we, wb_we_r);
     iob_reg #(ADDR_W,0) iob_reg_addr (clk_i, arst_i, 1'b0, valid_i, address_i, address_r);
     iob_reg #(DATA_W,0) iob_reg_iob_data (clk_i, arst_i, 1'b0, valid_i, wdata_i, wdata_r);
     iob_reg #(DATA_W/8,0) iob_reg_strb (clk_i, arst_i, 1'b0, valid_i, wb_select, wb_select_r);
 
-    assign rdata_o = ready_o? wb_data_i:wb_data_r;
-    assign ready_o = ready&(~ready_r);
+    assign rdata_o = ready? wb_data_i:wb_data_r;
+    assign ready_o = (ready_r)&(~wb_cyc_o);
     assign ready = wb_ack_i|wb_error_i;
     iob_reg #(1,0) iob_reg_ready (clk_i, arst_i, 1'b0, valid_e, ready, ready_r);
-    iob_reg #(DATA_W,0) iob_reg_wb_data (clk_i, arst_i, 1'b0, ready_o, wb_data_i, wb_data_r);
+    iob_reg #(DATA_W,0) iob_reg_wb_data (clk_i, arst_i, 1'b0, ready, wb_data_i, wb_data_r);
     
 
 endmodule
