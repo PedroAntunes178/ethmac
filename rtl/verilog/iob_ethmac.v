@@ -9,7 +9,8 @@ module iob_ethmac #(
     parameter TARGET      = "XILINX"
   )(
     input wire clk,
-    input wire rst,
+    input wire arst_i,
+    input wire wb_rst_i,
     
     input  wire                s_valid,
     input  wire [ADDR_W-1:2]   s_address,
@@ -68,7 +69,7 @@ module iob_ethmac #(
   iob_iob2wishbone #(
     ADDR_W-2, DATA_W
   ) iob2wishbone (
-    clk, rst,
+    clk, arst_i, wb_rst_i,
     s_valid, s_address, s_wdata, s_wstrb, s_rdata, s_ready,
     s_wb_addr, s_wb_select, s_wb_we, s_wb_cyc, s_wb_stb, s_wb_data_in, s_wb_ack, s_wb_error, s_wb_data_out
   );
@@ -76,7 +77,7 @@ module iob_ethmac #(
   iob_wishbone2iob #(
     MEM_ADDR_W, DATA_W
   ) wishbone2iob (
-    clk, rst,
+    clk, arst_i, wb_rst_i,
     m_wb_adr, m_wb_sel, m_wb_we, m_wb_cyc, m_wb_stb, m_wb_dat_out, m_wb_ack, m_wb_err, m_wb_dat_in,
     m_valid, m_addr, m_wdata, m_wstrb, m_rdata, m_ready
   );
@@ -85,7 +86,7 @@ module iob_ethmac #(
   ethmac eth_top (
     // WISHBONE common
     .wb_clk_i(clk),
-    .wb_rst_i(rst), 
+    .wb_rst_i(wb_rst_i), 
 
     // WISHBONE slave
     .wb_adr_i(s_wb_addr),

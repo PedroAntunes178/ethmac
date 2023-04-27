@@ -89,14 +89,14 @@ module iob_ethmac_sim_wrapper #(
 
   // Logic
   assign clk_i = wb_clk_i;
-  assign arst_i = wb_rst_i;
+  assign arst_i = 1'b0;
   assign int_o = ethernet_interrupt;
 
 
   iob_iob2wishbone #(
     MEM_ADDR_W, DATA_W
   ) iob2wishbone (
-    clk_i, arst_i,
+    clk_i, arst_i, wb_rst_i,
     m_valid, m_addr, m_wdata, m_wstrb, m_rdata, m_ready,
     m_wb_adr_o, m_wb_sel_o, m_wb_we_o, m_wb_cyc_o, m_wb_stb_o, m_wb_dat_o, m_wb_ack_i, m_wb_err_i, m_wb_dat_i
   );
@@ -104,7 +104,7 @@ module iob_ethmac_sim_wrapper #(
   iob_wishbone2iob #(
     ADDR_W-2, DATA_W
   ) wishbone2iob (
-    clk_i, arst_i,
+    clk_i, arst_i, wb_rst_i,
     wb_adr_i, wb_sel_i, wb_we_i, wb_cyc_i, wb_stb_i,  wb_dat_i, wb_ack_o, wb_err_o,  wb_dat_o,
     s_valid, s_address, s_wdata, s_wstrb, s_rdata, s_ready
   );
@@ -117,7 +117,8 @@ module iob_ethmac_sim_wrapper #(
     .TARGET("SIM")
   ) eth_0 (
     .clk(clk_i),
-    .rst(arst_i),
+    .arst_i(arst_i),
+    .wb_rst_i(wb_rst_i),
 
     .s_valid(s_valid),
     .s_address(s_address),
