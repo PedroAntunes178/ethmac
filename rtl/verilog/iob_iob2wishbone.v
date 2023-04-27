@@ -62,7 +62,7 @@ module iob_iob2wishbone #(
     iob_reg #(DATA_W/8,0) iob_reg_strb (clk_i, arst_i, wb_rst_r, valid_i, wb_select, wb_select_r);
 
     assign rdata_o = wb_data_r;
-    assign ready_o = (wb_ack_r)&(~wb_ack_i);
+    assign ready_o = (wb_ack_r)&(~wb_ack_i)&(~wb_rst_i);
     assign ready = wb_ack_i|wb_error_i;
     iob_reg #(1,0) iob_reg_ready (clk_i, arst_i, wb_rst_r, 1'b1, wb_ack_i, wb_ack_r);
     iob_reg #(DATA_W,0) iob_reg_wb_data (clk_i, arst_i, wb_rst_r, ready, wb_data_i, wb_data_r);

@@ -1,0 +1,71 @@
+[*]
+[*] GTKWave Analyzer v3.3.114 (w)1999-2023 BSI
+[*] Thu Apr 27 19:44:51 2023
+[*]
+[dumpfile] "/home/pantunes/Documents/iob-soc-opencryptolinux/submodules/ETH/submodules/ETHMAC/build/sim/ethmac.vcd"
+[dumpfile_mtime] "Thu Apr 27 19:43:42 2023"
+[dumpfile_size] 657627736
+[savefile] "/home/pantunes/Documents/iob-soc-opencryptolinux/submodules/ETH/submodules/ETHMAC/scripts/converters.waves.gtkw"
+[timestart] 11269299
+[size] 2552 1513
+[pos] -1 -1
+*-7.000000 11269682 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_ethernet.
+[treeopen] tb_ethernet.eth_sim_wrapper.
+[treeopen] tb_ethernet.eth_sim_wrapper.eth_0.
+[sst_width] 273
+[signals_width] 94
+[sst_expanded] 1
+[sst_vpaned_height] 474
+@28
+tb_ethernet.eth_sim_wrapper.iob2wishbone.valid_e
+tb_ethernet.eth_sim_wrapper.iob2wishbone.valid_i
+tb_ethernet.eth_sim_wrapper.iob2wishbone.valid_r
+tb_ethernet.eth_sim_wrapper.iob2wishbone.wb_cyc_o
+tb_ethernet.eth_sim_wrapper.iob2wishbone.wb_stb_o
+tb_ethernet.eth_sim_wrapper.iob2wishbone.ready
+tb_ethernet.eth_sim_wrapper.iob2wishbone.ready_o
+tb_ethernet.eth_sim_wrapper.iob2wishbone.wb_ack_i
+tb_ethernet.eth_sim_wrapper.iob2wishbone.wb_ack_r
+@200
+-
+@28
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.valid
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.valid_e
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.valid_o
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.valid_r
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.wb_cyc_i
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.wb_stb_i
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.ready
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.ready_i
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.ready_r
+tb_ethernet.eth_sim_wrapper.eth_0.wishbone2iob.wb_ack_o
+@200
+-
+-
+@28
+tb_ethernet.eth_sim_wrapper.wishbone2iob.valid
+tb_ethernet.eth_sim_wrapper.wishbone2iob.valid_e
+tb_ethernet.eth_sim_wrapper.wishbone2iob.valid_o
+tb_ethernet.eth_sim_wrapper.wishbone2iob.valid_r
+tb_ethernet.eth_sim_wrapper.wishbone2iob.wb_cyc_i
+tb_ethernet.eth_sim_wrapper.wishbone2iob.wb_stb_i
+tb_ethernet.eth_sim_wrapper.wishbone2iob.ready
+tb_ethernet.eth_sim_wrapper.wishbone2iob.ready_i
+tb_ethernet.eth_sim_wrapper.wishbone2iob.ready_r
+tb_ethernet.eth_sim_wrapper.wishbone2iob.wb_ack_o
+@200
+-
+@28
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.valid_e
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.valid_i
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.valid_r
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.wb_cyc_o
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.wb_stb_o
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.ready
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.ready_o
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.wb_ack_i
+@29
+tb_ethernet.eth_sim_wrapper.eth_0.iob2wishbone.wb_ack_r
+[pattern_trace] 1
+[pattern_trace] 0
