@@ -89,7 +89,7 @@ module iob_ethmac_sim_wrapper #(
 
   // Logic
   assign clk_i = wb_clk_i;
-  assign arst_i = 1'b0;
+  assign arst_i = wb_rst_i;
   assign int_o = ethernet_interrupt;
 
 
